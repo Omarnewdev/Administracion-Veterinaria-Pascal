@@ -1,0 +1,354 @@
+object Form1: TForm1
+  Left = 134
+  Height = 459
+  Top = 572
+  Width = 1011
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Veterinaria'
+  ClientHeight = 459
+  ClientWidth = 1011
+  DesignTimePPI = 120
+  Menu = MenuPrincipal
+  OnCreate = FormCreate
+  LCLVersion = '3.0.0.3'
+  object GroupBox1: TGroupBox
+    Left = 0
+    Height = 231
+    Top = 0
+    Width = 1011
+    Caption = 'Mascotas'
+    ClientHeight = 206
+    ClientWidth = 1007
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 10
+      Height = 20
+      Top = 0
+      Width = 56
+      Caption = 'Especies'
+      ParentColor = False
+    end
+    object listaEspecies: TListBox
+      Left = 10
+      Height = 131
+      Hint = 'Lista de especies registradas en el sistema.'
+      Top = 20
+      Width = 125
+      ExtendedSelect = False
+      ItemHeight = 0
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnSelectionChange = listaEspeciesSelectionChange
+    end
+    object Label2: TLabel
+      Left = 160
+      Height = 20
+      Top = 0
+      Width = 38
+      Caption = 'Razas'
+      ParentColor = False
+    end
+    object listaRazas: TListBox
+      Left = 150
+      Height = 170
+      Hint = 'Lista de razas animales según la especie seleccionada.'
+      Top = 20
+      Width = 125
+      ExtendedSelect = False
+      ItemHeight = 0
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnSelectionChange = listaRazasSelectionChange
+    end
+    object Mascotas: TLabel
+      Left = 300
+      Height = 20
+      Top = 0
+      Width = 62
+      Caption = 'Mascotas'
+      ParentColor = False
+    end
+    object areaFicha: TMemo
+      Left = 560
+      Height = 172
+      Hint = 'Ficha de la mascota seleccionada.'
+      Top = 20
+      Width = 260
+      ParentShowHint = False
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      ShowHint = True
+      TabOrder = 2
+    end
+    object Label3: TLabel
+      Left = 570
+      Height = 20
+      Top = 0
+      Width = 34
+      Caption = 'Ficha'
+      ParentColor = False
+    end
+    object botonCrearEspecie: TButton
+      Left = 10
+      Height = 31
+      Hint = 'Crea una nueva especie animal, por ejemplo: Aves, Reptiles, etc. (CTL+E)'
+      Top = 161
+      Width = 124
+      Caption = 'Crear especie...'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = botonCrearEspecieClick
+    end
+    object botonRegistrarMascota: TButton
+      Left = 850
+      Height = 31
+      Hint = 'Registra una nueva mascota en el sistema. (CTRL+R)'
+      Top = 20
+      Width = 144
+      Caption = 'Registrar...'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = botonRegistrarMascotaClick
+    end
+    object botonAdoptar: TButton
+      Left = 850
+      Height = 31
+      Hint = 'Permite asignar un dueño a una mascota que no tiene uno. (CTRL+D)'
+      Top = 70
+      Width = 144
+      Caption = 'Dar en adopción...'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnClick = botonAdoptarClick
+    end
+    object botonDarDeBajaMascota: TButton
+      Left = 850
+      Height = 31
+      Hint = 'Se da de baja una mascota quitando su registro del sistema. (CTRL+B)'
+      Top = 120
+      Width = 144
+      Caption = 'Dar de baja'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 6
+      OnClick = botonDarDeBajaMascotaClick
+    end
+    object tablaMascotas: TStringGrid
+      Left = 290
+      Height = 170
+      Top = 20
+      Width = 260
+      AutoFillColumns = True
+      ColCount = 2
+      Columns = <      
+        item
+          Title.Caption = 'ID'
+          Width = 128
+        end      
+        item
+          Title.Caption = 'Nombre mascota'
+          Width = 128
+        end>
+      ExtendedSelect = False
+      FixedCols = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect, goDblClickAutoSize, goSmoothScroll, goRowHighlight]
+      RowCount = 1
+      TabOrder = 7
+      TitleFont.CharSet = ANSI_CHARSET
+      TitleFont.Color = clBlack
+      TitleFont.Height = -15
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Pitch = fpVariable
+      TitleFont.Quality = fqDraft
+      OnSelection = tablaMascotasSelection
+      ColWidths = (
+        128
+        128
+      )
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 0
+    Height = 204
+    Top = 230
+    Width = 1011
+    Caption = 'Personas'
+    ClientHeight = 179
+    ClientWidth = 1007
+    TabOrder = 1
+    object tablaPersonas: TStringGrid
+      Left = 10
+      Height = 150
+      Top = 10
+      Width = 590
+      AutoFillColumns = True
+      Columns = <      
+        item
+          Title.Caption = 'Nombre'
+          Width = 118
+        end      
+        item
+          Title.Caption = 'Edad'
+          Width = 117
+        end      
+        item
+          Title.Caption = 'Genero'
+          Width = 117
+        end      
+        item
+          Title.Caption = 'DNI'
+          Width = 117
+        end      
+        item
+          Title.Caption = 'Dirección'
+          Width = 117
+        end>
+      ExtendedSelect = False
+      FixedCols = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll, goRowHighlight]
+      RowCount = 1
+      TabOrder = 0
+      OnSelection = tablaPersonasSelection
+      ColWidths = (
+        118
+        117
+        117
+        117
+        117
+      )
+    end
+    object Label4: TLabel
+      Left = 610
+      Height = 20
+      Top = -10
+      Width = 62
+      Caption = 'Mascotas'
+      ParentColor = False
+    end
+    object botonRegistrarPersona: TButton
+      Left = 850
+      Height = 31
+      Hint = 'Registra una nueva persona en el sistema. (CTRL+G)'
+      Top = 11
+      Width = 144
+      Caption = 'Registrar...'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = botonRegistrarPersonaClick
+    end
+    object botonDarDeBajaPersona: TButton
+      Left = 850
+      Height = 31
+      Hint = 'Se elimina la persona seleccionada del sistema. (CTRL+J)'
+      Top = 55
+      Width = 144
+      Caption = 'Dar de baja'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = botonDarDeBajaPersonaClick
+    end
+    object botonSalir: TButton
+      Left = 850
+      Height = 31
+      Hint = 'Sale de la aplicación.'
+      Top = 129
+      Width = 144
+      Caption = 'Salir'
+      Color = clRed
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = botonSalirClick
+    end
+    object tablaMascotasDePersona: TStringGrid
+      Left = 610
+      Height = 149
+      Top = 11
+      Width = 230
+      AutoFillColumns = True
+      ColCount = 2
+      Columns = <      
+        item
+          Title.Caption = 'ID'
+          Width = 113
+        end      
+        item
+          Title.Caption = 'Nombre'
+          Width = 113
+        end>
+      ExtendedSelect = False
+      FixedCols = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect, goDblClickAutoSize, goSmoothScroll, goRowHighlight]
+      RowCount = 1
+      TabOrder = 4
+      ColWidths = (
+        113
+        113
+      )
+    end
+  end
+  object MenuPrincipal: TMainMenu
+    object menuArchivo: TMenuItem
+      Caption = '&Archivo'
+      ShortCut = 32833
+      object menuArchivo_Salir: TMenuItem
+        Caption = '&Salir'
+        ShortCut = 16467
+        OnClick = menuArchivo_SalirClick
+      end
+    end
+    object menuMascotas: TMenuItem
+      Caption = '&Mascotas'
+      ShortCut = 32845
+      object menuMascotas_CrearEspecie: TMenuItem
+        Caption = 'Crear &especie...'
+        ShortCut = 16453
+        OnClick = menuMascotas_CrearEspecieClick
+      end
+      object menuMascotas_Registrar: TMenuItem
+        Caption = '&Registrar...'
+        ShortCut = 16466
+        OnClick = menuMascotas_RegistrarClick
+      end
+      object menuMasctoas_Adoptar: TMenuItem
+        Caption = '&Dar en adopción...'
+        ShortCut = 16452
+        OnClick = menuMasctoas_AdoptarClick
+      end
+      object menuMascotas_DarDeBaja: TMenuItem
+        Caption = 'Dar de &baja'
+        ShortCut = 16450
+        OnClick = menuMascotas_DarDeBajaClick
+      end
+    end
+    object menuPersonas: TMenuItem
+      Caption = '&Personas'
+      ShortCut = 32848
+      object menuPersonas_Registrar: TMenuItem
+        Caption = 'Re&gistrar...'
+        ShortCut = 16455
+        OnClick = menuPersonas_RegistrarClick
+      end
+      object menuPersonas_DarDeBaja: TMenuItem
+        Caption = 'Dar de ba&ja'
+        ShortCut = 16458
+        OnClick = menuPersonas_DarDeBajaClick
+      end
+    end
+  end
+end
