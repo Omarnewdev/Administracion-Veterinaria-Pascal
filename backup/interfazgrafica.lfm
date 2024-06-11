@@ -1,13 +1,13 @@
 object Form1: TForm1
-  Left = 269
+  Left = 134
   Height = 459
-  Top = 381
+  Top = 572
   Width = 1011
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Veterinaria'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 459
+  ClientWidth = 1011
   DesignTimePPI = 120
   Menu = MenuPrincipal
   OnCreate = FormCreate
