@@ -1,0 +1,111 @@
+object cuadroRegistrarPersona: TcuadroRegistrarPersona
+  Left = 565
+  Height = 176
+  Top = 250
+  Width = 343
+  BorderStyle = bsDialog
+  Caption = 'Registrar persona'
+  ClientHeight = 176
+  ClientWidth = 343
+  LCLVersion = '2.0.6.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 23
+    Caption = 'DNI:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 15
+    Top = 32
+    Width = 47
+    Caption = 'Nombre:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Height = 15
+    Top = 56
+    Width = 41
+    Caption = 'Genero:'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 15
+    Top = 80
+    Width = 29
+    Caption = 'Edad:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 8
+    Height = 15
+    Top = 104
+    Width = 53
+    Caption = 'Dirección:'
+    ParentColor = False
+  end
+  object campoDNI: TEdit
+    Left = 72
+    Height = 23
+    Top = 8
+    Width = 256
+    TabOrder = 0
+  end
+  object campoNombre: TEdit
+    Left = 72
+    Height = 23
+    Top = 32
+    Width = 256
+    TabOrder = 1
+  end
+  object comboBoxGenero: TComboBox
+    Left = 72
+    Height = 23
+    Top = 56
+    Width = 256
+    ItemHeight = 15
+    Items.Strings = (
+      'Masculino'
+      'Femenino'
+    )
+    TabOrder = 2
+    Text = 'Selecciona el género...'
+  end
+  object campoEdad: TEdit
+    Left = 72
+    Height = 23
+    Top = 80
+    Width = 256
+    NumbersOnly = True
+    TabOrder = 3
+  end
+  object campoDireccion: TEdit
+    Left = 72
+    Height = 23
+    Top = 104
+    Width = 256
+    TabOrder = 4
+  end
+  object botonRegistrar: TButton
+    Left = 8
+    Height = 25
+    Top = 144
+    Width = 160
+    Caption = 'Registrar'
+    OnClick = botonRegistrarClick
+    TabOrder = 5
+  end
+  object botonCancelar: TButton
+    Left = 176
+    Height = 25
+    Top = 144
+    Width = 160
+    Caption = 'Cancelar registro'
+    OnClick = botonCancelarClick
+    TabOrder = 6
+  end
+end

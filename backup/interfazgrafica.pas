@@ -304,7 +304,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 var s: string;
 begin
-    atrControlador:= TControlador.GetInstancia.init;
+    atrControlador:= TControlador.init;
     actualizarEspeciesYRazas;
     atrListaMascotasPorEspecie:= TListaArchivable.Create;
     atrListaMascotasPorDuenno:= TListaArchivable.Create;

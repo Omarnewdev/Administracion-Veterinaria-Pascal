@@ -236,7 +236,7 @@ end;
 
 function TListaArchivable.haySiguienteNodo: boolean;
 begin
-  result:=(self.atrIterador.Next <> NIL);
+     result:=(self.atrIterador.Next <> NIL);
 end;
 
 procedure TListaArchivable.reset;

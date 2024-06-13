@@ -19,20 +19,21 @@ type
             const_NOMBRE_ARCHIVO_ESPECIES: string; static;
             const_NOMBRE_ARCHIVO_MASCOTAS: string; static;
             const_NOMBRE_ARCHIVO_PERSONAS: string; static;
+            class function getNDB:String;
+            class function getNAE:String;
+            class function getNAM:String;
+            class function getNAP:String;
 
       public
-        class function getNDB:String;
-        class function getNAE:String;
-        class function getNAM:String;
-        class function getNAP:String;
+
         //Es la carpeta donde se encuentran los archivos
-        property NOMBRE_DIRECTORIO_DATABASE:string read getNDB;
+        class property NOMBRE_DIRECTORIO_DATABASE:string read getNDB;
         //Es donde se guardan los archivos de la clase ESPECIES
-        property NOMBRE_ARCHIVO_ESPECIES:string read getNAE;
+        class property NOMBRE_ARCHIVO_ESPECIES:string read getNAE;
         //Es donde se guardan los archivos de la clase MASCOTAS
-        property NOMBRE_ARCHIVO_MASCOTAS:string read getNAM;
+        class property NOMBRE_ARCHIVO_MASCOTAS:string read getNAM;
         //Es donde se guardan los archivos de la clase PERSONAS
-        property NOMBRE_ARCHIVO_PERSONAS:string read getNAP;
+        class property NOMBRE_ARCHIVO_PERSONAS:string read getNAP;
 
         {guardarEnArchivo: Guarda el objeto actual en un archivo.
         Cada clase que hereda de TArchivable implementa esta operación a su manera.
@@ -235,7 +236,7 @@ end;
 
 function TListaArchivable.haySiguienteNodo: boolean;
 begin
-  result:=(self.atrIterador.Next <> NIL);
+     result:=(self.atrIterador.Next <> NIL);
 end;
 
 procedure TListaArchivable.reset;

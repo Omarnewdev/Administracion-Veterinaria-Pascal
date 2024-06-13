@@ -80,6 +80,68 @@ type
       property GestacionStr: String read getGestacionStr;
   end;
 
+  { TMascota }
+
+  TMascota = class(TAnimal)
+    strict private
+      type
+          TMascotaFileRecord = packed record
+              FatrID:String[10];
+              FatrNombre:String[30];
+              FatrGenero:string[9];
+              FatrGeneroEspecifico:TGenero;
+              FatrEdad:byte;
+              FatrGestacion:String[8];
+              FatrGestacionEsp:TGestacion;
+              FatrEspecie:String[20];
+              FatrRaza:String[20];
+              FatrEsAdoptado:boolean;
+              FatrDuenno:string[30];
+          end;
+          TArchivoMascota = file of TMascotaFileRecord;
+
+    private
+      atrID: String;
+      atrEspecie: String;
+      atrRaza: string;
+      atrEsAdoptado: boolean;
+      atrDuenno: String;
+
+
+
+    public
+
+      constructor Create(pID,pNombre:String; pGenero:Tgenero; pEdad:byte; pGestacion: Tgestacion;
+        pEspecie,pRaza:String); overload;
+      destructor Destroy; override;
+
+      function getDuennoID: string;
+      function getID: String;
+      function getRaza: String;
+      function getEspecie: String;
+      function esAdoptado: boolean;
+
+      procedure setEspecie(AValue: String);
+      procedure setDuennoID(AValue: string);
+      procedure setID(AValue: String);
+      procedure setRaza(AValue: String);
+      procedure setAdoptado(a:boolean;pidDuenno:String='');
+
+      function getFicha:String; override;
+      function guardarEnArchivo(direccionCompleta:String):boolean; override;
+      function clonar:TArchivable; override;
+      class function recuperarDeArchivo(direccionCompleta,idBusqueda:String):TArchivable; override;
+      class function recuperarLista(direccionCompleta:String):TLIstaArchivable; override;
+
+
+      property ID:String read getID write setID;
+      property Especie:String read getEspecie write setEspecie;
+      property Raza:String read getRaza write setRaza;
+      property Adoptado:boolean read esAdoptado;
+      property DuennoID:string read getDuennoID write setDuennoID;
+
+  end;
+
 
 
 implementation
@@ -206,6 +268,9 @@ begin
   Close(dbEspecie);
 end;
 
+
+
+
 { TAnimal }
 
 constructor TAnimal.Create(pNOMBRE: String; pGenero: TGenero; pEdad: byte;
@@ -290,6 +355,173 @@ end;
 procedure TAnimal.setNombre(AValue: String);
 begin
   self.atrNombre:=AValue;
+end;
+
+{ TMascota }
+
+function TMascota.getEspecie: String;
+begin
+  result:=self.atrEspecie;
+end;
+
+function TMascota.esAdoptado: boolean;
+begin
+  result:=self.atrEsAdoptado;
+end;
+
+procedure TMascota.setEspecie(AValue: String);
+begin
+  self.atrEspecie:=AValue;
+end;
+
+constructor TMascota.Create(pID, pNombre: String; pGenero: Tgenero;
+  pEdad: byte; pGestacion: Tgestacion; pEspecie, pRaza: String);
+begin
+  inherited create(pNombre,pGenero,pEdad,pGestacion);
+  self.atrID:=pID;
+  self.atrEspecie:=pEspecie;
+  self.atrRaza:=pRaza;
+  self.atrEsAdoptado:=FALSE;
+  self.atrDuenno:='';
+
+
+end;
+
+destructor TMascota.Destroy;
+begin
+  inherited Destroy;
+end;
+
+function TMascota.getDuennoID: string;
+begin
+  result:= self.atrDuenno;
+end;
+
+function TMascota.getID: String;
+begin
+  result:= self.atrID;
+end;
+
+function TMascota.getRaza: String;
+begin
+  result:= self.atrRaza;
+end;
+
+procedure TMascota.setDuennoID(AValue: string);
+begin
+  self.atrDuenno:=Avalue;
+end;
+
+procedure TMascota.setID(AValue: String);
+begin
+  self.atrID:=AValue;
+end;
+
+procedure TMascota.setRaza(AValue: String);
+begin
+  self.atrRaza:=AValue;
+end;
+
+procedure TMascota.setAdoptado(a: boolean; pIDDuenno: String);
+begin
+  self.atrEsAdoptado:=a;
+  self.atrDuenno:=pIDDuenno;
+end;
+
+{Tenemos que devuelve esto en String:
+
+ID: 568
+Especie: Ave
+Raza: Loro común
+Nombre: Pepe
+Edad: 4
+Genero: Macho
+Tipo: Ovíparo
+Adoptado: NO}
+function TMascota.getFicha: String;
+var ad:String;
+begin
+  if self.esAdoptado then
+     ad:='SI'
+  else
+     ad:='NO';
+  result:='ID: '+self.ID+#10+'Especie: '+self.Especie+#10+'Raza: '+self.Raza+#10+
+  'Nombre: '+self.Nombre+#10+'Edad: '+InttoStr(self.Edad)+#10+'Genero: '+self.GeneroStr+#10+
+  'Tipo: '+self.GestacionStr+#10+'Adaptado: '+ad;
+end;
+
+function TMascota.guardarEnArchivo(direccionCompleta: String): boolean;
+var guardar:TMascotaFileRecord;
+    dbMascota:TArchivoMascota;
+
+  //Aqui esta un poco dificil porque solo abrira un archivo al invocar estas funciones
+begin
+  AssignFile(dbMascota,direccionCompleta);
+  {$I-}// Desactiva la deteccion manual de errores
+  if FileExists(direccionCompleta) then
+     reset(dbMascota)
+  else
+     rewrite(dbMascota);
+  {$I+}//Vuelve a activar la deteccion manual de errores
+
+  If IOResult<>0 then begin
+    //Aqui salto algun error
+    result:=false;
+    EXIT;
+  end;
+  guardar.FatrNombre:=self.atrNombre;
+  guardar.FatrEdad:=self.Edad;
+  guardar.FatrDuenno:=self.atrDuenno;
+  guardar.FatrEsAdoptado:=self.esAdoptado;
+  guardar.FatrEspecie:=self.Especie;
+  guardar.FatrGenero:=self.GeneroStr;
+  guardar.FatrGeneroEspecifico:=self.Genero;
+  guardar.FatrGestacion:=self.GestacionStr;
+  guardar.FatrGestacionEsp:=self.Gestacion;
+  guardar.FatrDuenno:=self.DuennoID;
+
+  seek(dbMascota,FileSize(dbMascota));
+  write(dbMascota,guardar);
+
+  {$I-}
+  Close(dbMascota);
+  {$I+}
+  if IOResult<>0 then
+     result:=false
+  else
+     result:=true;
+
+end;
+
+function TMascota.clonar: TArchivable;
+begin
+  result:=TMascota.Create(self.ID,self.Nombre,self.Genero,self.Edad,self.Gestacion,self.Especie,self.Raza);
+end;
+
+class function TMascota.recuperarDeArchivo(direccionCompleta: String;
+  idBusqueda: String): TArchivable;
+var dbMascota:TArchivoMascota;
+    buscar:TMascotaFileRecord;
+begin
+  result:=NIL;
+  AssignFile(dbMascota,direccionCompleta);
+  if FileExists(direccionCompleta) then
+     reset(dbMascota)
+  else
+     rewrite(dbMascota);
+  seek(dbMascota,0);
+  while not eof(dbMascota) do begin
+    read(dbMascota,buscar);
+    if CompareStr(buscar.FatrID,idBusqueda)=0 then begin
+      result:=TMascota.Create(buscar.FatrID,buscar.FatrNombre,buscar.FatrGeneroEspecifico,buscar.FatrEdad,buscar.FatrGestacionEsp,buscar.FatrEspecie,buscar.FatrRaza);
+      EXIT;
+    end;
+  end;
+end;
+
+class function TMascota.recuperarLista(direccionCompleta: String): TLIstaArchivable;
+begin
+
 end;
 
 

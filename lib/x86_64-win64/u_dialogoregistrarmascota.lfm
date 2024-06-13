@@ -1,0 +1,153 @@
+object dialogoRegistrarMascota: TdialogoRegistrarMascota
+  Left = 579
+  Height = 240
+  Top = 203
+  Width = 296
+  BorderStyle = bsDialog
+  Caption = 'Registrar nueva mascota'
+  ClientHeight = 240
+  ClientWidth = 296
+  OnCreate = FormCreate
+  LCLVersion = '2.0.6.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 14
+    Caption = 'ID:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 15
+    Top = 32
+    Width = 47
+    Caption = 'Nombre:'
+    ParentColor = False
+  end
+  object campoID: TEdit
+    Left = 80
+    Height = 23
+    Top = 8
+    Width = 184
+    TabOrder = 0
+  end
+  object Label3: TLabel
+    Left = 8
+    Height = 15
+    Top = 56
+    Width = 29
+    Caption = 'Edad:'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 15
+    Top = 80
+    Width = 41
+    Caption = 'Género:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 8
+    Height = 15
+    Top = 104
+    Width = 55
+    Caption = 'Gestación:'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 8
+    Height = 15
+    Top = 128
+    Width = 42
+    Caption = 'Especie:'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 8
+    Height = 15
+    Top = 152
+    Width = 27
+    Caption = 'Raza:'
+    ParentColor = False
+  end
+  object campoNombre: TEdit
+    Left = 80
+    Height = 23
+    Top = 32
+    Width = 184
+    TabOrder = 1
+  end
+  object campoEdad: TEdit
+    Left = 80
+    Height = 23
+    Top = 56
+    Width = 184
+    NumbersOnly = True
+    TabOrder = 2
+  end
+  object comboBoxGenero: TComboBox
+    Left = 80
+    Height = 23
+    Top = 80
+    Width = 184
+    ItemHeight = 15
+    Items.Strings = (
+      'Macho'
+      'Hembra'
+    )
+    TabOrder = 3
+    Text = 'Selecciona un género...'
+  end
+  object comboBoxGestacion: TComboBox
+    Left = 80
+    Height = 23
+    Top = 104
+    Width = 184
+    ItemHeight = 15
+    Items.Strings = (
+      'Ovíparo'
+      'Vivíparo'
+    )
+    TabOrder = 4
+    Text = 'Selecciona el tipo de gestación...'
+  end
+  object comboBoxEspecie: TComboBox
+    Left = 80
+    Height = 23
+    Top = 128
+    Width = 184
+    ItemHeight = 15
+    OnSelect = comboBoxEspecieSelect
+    TabOrder = 5
+    Text = 'Selecciona una especie...'
+  end
+  object comboBoxRaza: TComboBox
+    Left = 80
+    Height = 23
+    Top = 152
+    Width = 184
+    ItemHeight = 15
+    TabOrder = 6
+    Text = 'Selecciona una raza...'
+  end
+  object botonRegistrar: TButton
+    Left = 8
+    Height = 25
+    Top = 192
+    Width = 136
+    Caption = 'Registrar'
+    OnClick = botonRegistrarClick
+    TabOrder = 7
+  end
+  object botonCancelar: TButton
+    Left = 152
+    Height = 25
+    Top = 192
+    Width = 136
+    Caption = 'Cancelar registro'
+    OnClick = botonCancelarClick
+    TabOrder = 8
+  end
+end
